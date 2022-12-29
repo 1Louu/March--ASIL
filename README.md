@@ -1,7 +1,7 @@
 # Marché ASIL
 
 Ce projet est destiné à l'association ASIL afin de les fournir une plateforme qui les leurs permettront d'affectuer les produits, ingrédients afin de déterminer les coûts, les gains et les pertes.
-Dé
+Développé par Luc BOUVARD.
 
 ## Arborescence du site
 
