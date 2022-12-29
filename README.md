@@ -1,8 +1,28 @@
 # Marché ASIL
 
+## Contexte
+
 Ce projet est destiné à l'association ASIL afin de les fournir une plateforme qui les leurs permettront d'affectuer les produits, ingrédients afin de déterminer les coûts, les gains et les pertes.
 
 Développé par Luc BOUVARD.
+
+## Cible du projet
+
+Elle est destinée uniquement qu'au membre de l'association afin de faciliter la gestion de compte de leurs association.
+
+## Composition du projet
+
+Nous utilisont la base de donnée MySQL pour raison qu'elle répondent complètement aux besoin de ce projet.
+
+#### FrontEnd : 
+
+Ce projet utilise Vue.JS ainsi que Vuetify pour le frontEnd par mon propre choix.
+
+#### Backend : 
+
+Ce projet utilise NodeJS, mysql2, Nodemon, Express et Cors pour compléter la communication entre la base de donnée et l'application.
+
+Ce qui fait effectivement ce projet d'une structure de Fullstack. 
 
 ## Arborescence du site
 
@@ -33,4 +53,4 @@ L'application devra :
 
 ## Licence 
 
-Pas de licence pour l'instant
+licence par défaut, pour de détail, lire ici : https://docs.github.com/fr/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository
