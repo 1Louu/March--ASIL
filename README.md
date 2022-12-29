@@ -1,15 +1,16 @@
 # Marché ASIL
 
 Ce projet est destiné à l'association ASIL afin de les fournir une plateforme qui les leurs permettront d'affectuer les produits, ingrédients afin de déterminer les coûts, les gains et les pertes.
+
 Développé par Luc BOUVARD.
 
 ## Arborescence du site
 
 - **[ / ]** Page d'accueil qui démontre une table des produits en stock proposées avec des boutons Ajouter. Elle démontre également une autre colonne qui présentes les produits ajoutés, l'utilisateur aura ensuite la possibilité de "payer" ou "d'annuler" les produits selectionné. 
 - **[ /analyse ]** Page qui détermine les comptes, les achats effectués et les importations 
-- **[ /gestion-inventaire ]** Page permettant d'apporter des modifications à les produits importé, d'ajouter les ingrédients pour obtenir un produit.
+- **[ /gestion-inventaire ]** Page permettant d'apporter des modifications à les produits importé, d'ajouter les ingrédients nécessaire pour un produit désigné.
 
-##### *Page secondaire ( Basse priorités ) :*
+##### *Page secondaire ( Basse priorité ) :*
 
 - **[ /connexion ]** Page de connexion qui sera la page primaire pour ceux qui ne sont pas connecté.
 - **[ /cree ]** Page de création de compte, l'utilisateur pourra entrer leurs identifiants, une fois crée, l'utilisateur devra attendre la vérification de la part d'un administrateur pour garantir les permission de voyager les pages.
@@ -25,10 +26,10 @@ L'application devra :
 - Créer une historique d'achats et de ventes.
 - Effectuer les analyses et calculs nécéssaire pour déterminer les gains et pertes. 
 
-##### *Fonctionnalité Optionel ( Basse priorités ) :*
+##### *Fonctionnalité Optionel ( Basse priorité ) :*
 
 - Gestion de compte. 
-- Gérer les permissions dans cette applications.
+- Gérer les permissions dans cette application.
 
 ## Licence 
 
