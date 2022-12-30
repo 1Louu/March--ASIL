@@ -3,7 +3,7 @@ import db from "../config/database.js";
 
 //Avoir tout produit
 export const getProducts=(result)=>{
-    db.query("SELECT * FROM produits", (err, results)=>{
+    db.query("SELECT * FROM produit", (err, results)=>{
         if(err){
             console.log(err);
             result(err, null);
@@ -39,7 +39,7 @@ export const insertProduct=(data,result)=>{
 
 // Mettre à Jour un produit par ID
 export const updateProduct = (data, id, result)=>{
-    db.query("UPDATE product SET produit_nom = ?, produit_quantite = ?, produit_prix = ? WHERE produit_id = ?", [data.produit_name, data.produit_quantité, data.produit_prix, id], (err, results)=>{
+    db.query("UPDATE produit SET produit_nom = ?, produit_quantite = ?, produit_prix = ? WHERE produit_id = ?", [data.produit_name, data.produit_quantité, data.produit_prix, id], (err, results)=>{
         if(err){
             console.log(err);
             result(err, null);

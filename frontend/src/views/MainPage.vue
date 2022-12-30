@@ -1,10 +1,14 @@
 <template>
-    <h1>Hi</h1>
+    <ProduitList/>
 </template>
 
 <script>
+import ProduitList from "../components/ProduitList.vue";
 export default {
-    name: 'MainPage'
+    name: 'MainPage',
+    components: {
+        ProduitList, 
+    }
 }
 </script>
 
