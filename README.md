@@ -16,7 +16,7 @@ Nous utilisont la base de donnée MySQL pour raison qu'elle répondent complète
 
 #### FrontEnd : 
 
-Ce projet utilise Vue.JS ainsi que Vuetify pour le frontEnd par mon propre choix.
+Ce projet utilise Vue.JS ainsi que Vuetify et Axios pour le frontEnd par mon propre choix.
 
 #### Backend : 
 

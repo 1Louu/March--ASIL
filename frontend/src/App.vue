@@ -1,22 +1,22 @@
 <template>
-  <routerView/>
+  <v-app>
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App'
+  name: 'App',
+  data: () => ({
+    //
+  }),
 }
 </script>
 
-<style>
-@import "~bulma/css/bulma.css";
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+@import "./style/_global.sass";
+.v-main
+  background-color: $Darker
 </style>
