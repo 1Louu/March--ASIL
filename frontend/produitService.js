@@ -46,7 +46,6 @@ class ProduitService{
         return axios.post(url, {
             nom: text.nom,
             prix_unique: text.prix_unique,
-            quantité: text.quantité
         });
     }
 
