@@ -5,7 +5,7 @@ import express from "express";
 import {
     showProduits,
     showProduitByID,
-    createProduit,
+    insertProduit,
     updateProduit,
     deleteProduitByID,
 } from "../controllers/produit.js";
@@ -20,13 +20,13 @@ router.get("/produit", showProduits);
 router.get("/produit/:id", showProduitByID);
 
 // Create new product 
-router.get("/produit", createProduit);
+router.post("/produit", insertProduit);
 
 // Update product
-router.get("/produit/:id", updateProduit);
+router.put("/produit/:id", updateProduit);
 
 // Delete product
-router.get("/produit/:id", deleteProduitByID);
+router.delete("/produit/:id", deleteProduitByID);
 
 // Export default router
 export default router; 

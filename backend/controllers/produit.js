@@ -30,7 +30,8 @@ export const showProduitByID=(req, res)=>{
 };
 
 //create new produit
-export const createProduit=(req, res)=>{
+export const insertProduit=(req, res)=>{
+
     const data = req.body; 
     insertProduct(data, (err, results) => {
         if(err){

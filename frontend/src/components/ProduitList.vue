@@ -56,18 +56,28 @@ export default {
     flex-direction: column
     h1
         border-top-left-radius: 10px
-        height: 50px
+        height: 55px
         background: $Color1
         text-align: center
         color: $Light
+        border-left: #00000033 7px solid
+        border-top: #00000033 7px solid
     .list-item
-        background: $Color2
+        background: $Light
         width: 60vw
         height: 80vh
         overflow: auto
         border-bottom-left-radius: 10px
+        border-left: #00000033 7px solid
+        border-bottom: #00000070 7px solid
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        justify-content: start
+        align-items: flex-start
+        padding: 10px
         .item 
-            background: $Color1
+            background: $Color2
             display: flex
             font-weight: bold
             color: $Light
@@ -75,11 +85,16 @@ export default {
             padding: 5px
             text-align: left
             width: fit-content
-            margin: 40px
+            height: fit-content
+            margin-top: 10px
+            margin-right: 10px
             border-radius: 20px
+            border: 3px solid #00000070
             font-size: 20px
             padding: 20px
             box-shadow: #00000059 3px 3px 3px 1px
+            margin-bottom: 10px
+            margin-top: auto
 
 .right-menu
     display: flex
@@ -87,15 +102,19 @@ export default {
     h1
         border-radius: 0px
         border-top-right-radius: 10px
-        height: 50px
+        height: 55px
         background: $Color1-C
         text-align: center
         color: $Light
+        border-right: #00000070 7px solid
+        border-top: #00000033 7px solid
     .list-select
         display: flex
         flex-direction: column
-        background: $Color2-C
+        background: $Light2
         border-bottom-right-radius: 10px
         width: 20vw
         height: 80vh
+        border-right: #00000070 7px solid
+        border-bottom: #00000070 7px solid
 </style>

@@ -54,7 +54,7 @@ export default {
     }
   }, 
   computed: {
-    isDisable() {
+    isDisable() { // rework this.
       if (this.text.nom != (!!this.text.nom && ( (this.text.nom || '').length <= 30 ) ) )
         if( this.text.quantité != ( !!this.text.quantité &&  (this.text.quantité || '').length <= 11  &&  (this.text.quantité - Math.floor(this.text.quantité)) == 0 ) )
           if(this.text.prix_unique != (!!this.text.prix_unique && ( (this.text.prix_unique || '').length <= 30 )))
@@ -70,10 +70,8 @@ export default {
 <style scoped lang="sass">
 @import "../style/_global.sass"
 .insert
-    background: white 
-    padding: 30px
-    display: flex
-    flex-direction: column
-    div
-        display: 
+  background: white 
+  padding: 30px
+  display: flex
+  flex-direction: column
 </style>

@@ -18,5 +18,5 @@ export default {
 <style lang="sass">
 @import "./style/_global.sass";
 .v-main
-  background-color: $Darker
+  background-color: $Color2
 </style>
