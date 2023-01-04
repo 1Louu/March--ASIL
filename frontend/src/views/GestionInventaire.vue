@@ -3,19 +3,20 @@
         <h1>Gestion d'inventaire</h1>
         <div class="insert">
             <v-text-field
-            variant="outlined" :rules="rules"
+            variant="outlined" :rules="rules" @input="checkRules"
             label="Nom" v-model="text.nom" required clearable/>
             <v-text-field
-            variant="outlined" :rules="rules2" type="number"
-            label="Quantité" v-model="text.quantité" required clearable/>
+            variant="outlined" :rules="rules" type="number" @input="checkRules"
+            label="quantite" v-model="text.quantite" required clearable/>
             <v-text-field
-            variant="outlined" :rules="rules" type="number"
+            variant="outlined" :rules="rules" type="number" @input="checkRules"
             label="Prix Unique" v-model="text.prix_unique" suffix="€" clearable required/>
             <div>
-                <v-btn v-on:click="createItem" :disabled="isDisable">Ajouter</v-btn>
+                <v-btn v-on:click="createItem" v-bind:disabled="!isValid">Ajouter</v-btn>
                 <v-btn>Supprimer</v-btn>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -28,14 +29,16 @@ export default {
       return{   
         items: [],
         error: '',
+        value: '', value2: '', value3: '',
         rules: [
         value => !!value || 'Nécessaire.',
-        value => (value || '').length <= 30 || 'Maximum 30 charactères'
-      ], rules2: [
-        value => !!value || 'Nécessaire.',
-        value => (value || '').length <= 11 || 'Maximum 30 charactères',
-        value => (value - Math.floor(value)) == 0 || 'Nombres entière uniquement'
-      ],
+        value2 => !!value2 || 'Nécessaire.',
+        value3 => !!value3 || 'Nécessaire.',
+        value => (value || '').length <= 30 || 'Maximum 30 charactères',
+        value2 => (value2 || '').length <= 7 || 'Maximum 7 charactères',
+        value3 => (value3 || '').length <= 7 || 'Maximum 7 charactères',
+        value2 => (value2 - Math.floor(value2)) == 0 || 'Nombres entière uniquement'
+        ],
         text: [],
       }
     },
@@ -48,22 +51,15 @@ export default {
     }, 
     methods: {
     async createItem() {
+      console.log(this.text);
       await ProduitService.insertProduit(this.text);
-      this.text.nom ="";  this.text.quantité =""; this.text.prix_unique = "";
+      this.text.nom ="";  this.text.quantite =""; this.text.prix_unique = "";
       this.items = await ProduitService.getProduit(); 
+    },
+    checkRules() {
+      this.isValid = this.rules.every(rule => rule(this.value) && rule(this.value2) && rule(this.value3));
     }
   }, 
-  computed: {
-    isDisable() { // rework this.
-      if (this.text.nom != (!!this.text.nom && ( (this.text.nom || '').length <= 30 ) ) )
-        if( this.text.quantité != ( !!this.text.quantité &&  (this.text.quantité || '').length <= 11  &&  (this.text.quantité - Math.floor(this.text.quantité)) == 0 ) )
-          if(this.text.prix_unique != (!!this.text.prix_unique && ( (this.text.prix_unique || '').length <= 30 )))
-            return false
-          else return true
-        else return true
-      else return true
-    } 
-  }
 }
 </script>
 
