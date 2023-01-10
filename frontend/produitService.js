@@ -43,8 +43,13 @@ class ProduitService{
 
     // Create Produit
     static insertProduit(text){
+        
+        if( text.quantite == 0){
+            text.quantite = 1;
+        }
         return axios.post(url, {
             nom: text.nom,
+            quantite: text.quantite,
             prix_unique: text.prix_unique,
         });
     }

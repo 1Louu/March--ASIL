@@ -7,22 +7,29 @@
                 v-bind:item="item"
                 v-bind:key="item.id"  >
                     <p>{{ item.nom }}</p>
-                    <p>quantite: {{ item.quantite }}</p>
+                    <p>quantité: {{ item.quantite }}</p>
                     <p>Prix Unique: {{ item.prix_unique }}€</p>
-                    <v-btn @click="addToCart(item)" v-if="!atquantiteLimit(item)">Ajouter</v-btn>
+                    <v-btn class="btn" @click="addToCart(item)" v-if="!atquantiteLimit(item)">Ajouter</v-btn>
                 </div>
             </div>
         </div>
         <div class="right-menu columns">
             <h1>Produit Sélectionné</h1>
             <div class="list-select">
-                <div class="cartitem" v-for="(Citem) in cart"
+                <div class="cartitem" v-for="(Citem) in cart"                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
                 v-bind:item="Citem"
                 v-bind:key="Citem.id">  
                     <p>{{ Citem.nom }}</p>
-                    <p>quantite: {{ Citem.quantite }}</p>
-                    <p>Prix Unique: {{ Citem.prix_unique }}€</p>
-                    <v-btn @click="removeFromCart(Citem)" v-if="inCart(Citem.id)">Enlever</v-btn>
+                    <p>Quantité: {{ Citem.quantite }}</p>
+                    <p>Prix: {{ Citem.prix }}€</p>
+                    <v-btn class="btn" @click="removeFromCart(Citem)">Enlever</v-btn>
+                </div>
+            </div>
+            <div class="cart-check">
+                <p>Prix Total : {{ total }}€</p>
+                <div>
+                    <v-btn @click="removeAllFromCart">Annuler</v-btn>
+                    <v-btn>Payer</v-btn>
                 </div>
             </div>
         </div>
@@ -38,6 +45,7 @@ export default {
             items:[],
             error: '',
             cart: [],
+            total: 0,
         };
     }, 
     async created() {
@@ -52,37 +60,48 @@ export default {
         }
     }, 
     methods: {
+        totalPrice(){
+            this.total= 0;
+            this.cart.forEach(element => this.total= element.prix + this.total);
+        },
         addToCart(item) {
          // Check if the item is already in the cart
         const cItem = this.cart.find(i => i.id === item.id)
 
         if (cItem) {
         // Update the quantite of the item in the cart
-        cItem.quantite++
+        cItem.quantite++;
+        cItem.prix = cItem.prix + cItem.prix_unique;
         } else {
         // Add the item to the cart with a quantite of 1
-        this.cart.push({ id: item.id, name: item.name, quantite: 1 })
+        this.cart.push({ id: item.id, nom: item.nom, quantite: 1, prix: item.prix_unique, prix_unique: item.prix_unique});
         }
-
         // Save the updated cart to local storage
         localStorage.setItem('cart', JSON.stringify(this.cart))
+        this.totalPrice();
         },
         removeFromCart(item) {
         // Remove the item from the cart
-        this.cart = this.cart.filter(i => i.id !== item.id)
+        this.cart = this.cart.filter(i => i.id !== item.id);
 
         // Save the updated cart to local storage
-        localStorage.setItem('cart', JSON.stringify(this.cart))
+        localStorage.setItem('cart', JSON.stringify(this.cart));
+        this.totalPrice();
         },
-        inCart(item) {
+        removeAllFromCart(){
+            this.cart= [];
+            localStorage.removeItem('cart');
+            this.totalPrice();
+        },
+        inCart(Citem) {
         // Check if the item is in the cart
-        return this.cart.some(i => i.id === item.id)
+        return this.cart.some(i => i.id === Citem.id)
         },
         atquantiteLimit(item) {
         // Check if the item is in the cart and at the quantite limit
         const cItem = this.cart.find(i => i.id === item.id)
         return cItem && cItem.quantite >= item.quantite
-        },
+        }
     }
 }
 </script>
@@ -154,19 +173,17 @@ export default {
         display: flex
         flex-direction: column
         background: $Light2
-        border-bottom-right-radius: 10px
         width: 20vw
-        height: 80vh
+        height: 65vh
         border-right: #00000070 7px solid
-        border-bottom: #00000070 7px solid
         overflow: auto
+        padding-bottom: 20px
         .cartitem 
             background: $Color2
             display: flex
             font-weight: bold
             color: $Light
             flex-direction: column
-            padding: 5px
             text-align: left
             margin: 20px 10px 0px 20px
             width: stretch
@@ -176,5 +193,26 @@ export default {
             font-size: 20px
             padding: 20px
             box-shadow: #00000059 3px 3px 3px 1px
+    .cart-check
+        height: 15vh
+        border-left: #00000070 7px solid
+        border-bottom: #00000070 7px solid
+        border-right: #00000070 7px solid
+        border-bottom-right-radius: 10px
+        background: $Light
+        text-align: center
+        display: flex
+        flex-direction: column
+        p
+            font-size: 24px
+            text-align: left
+            margin: auto
+        div
+            margin: auto
+        button
+            margin-left: 32px
+            margin-right: 32px
 
+.btn
+    background: $Color1
 </style>

@@ -50,6 +50,7 @@ L'application devra :
 
 - Gestion de compte. 
 - Gérer les permissions dans cette application.
+- Informer l'utilisateur que le même nom de produit a été utilisée
 
 ## Licence 
 

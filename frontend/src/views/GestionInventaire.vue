@@ -1,18 +1,20 @@
 <template>
     <div>
         <h1>Gestion d'inventaire</h1>
+        <v-btn router-link to="/">Shop</v-btn>
+        <v-btn router-link to="/analyse">Analyse</v-btn>
         <div class="insert">
             <v-text-field
-            variant="outlined" :rules="rules" @input="checkRules"
+            variant="outlined" @input="checkRules"
             label="Nom" v-model="text.nom" required clearable/>
             <v-text-field
-            variant="outlined" :rules="rules" type="number" @input="checkRules"
+            variant="outlined" type="number" @input="checkRules"
             label="quantite" v-model="text.quantite" required clearable/>
             <v-text-field
-            variant="outlined" :rules="rules" type="number" @input="checkRules"
+            variant="outlined" type="number" @input="checkRules"
             label="Prix Unique" v-model="text.prix_unique" suffix="€" clearable required/>
             <div>
-                <v-btn v-on:click="createItem" v-bind:disabled="!isValid">Ajouter</v-btn>
+                <v-btn v-on:click="createItem">Ajouter</v-btn>
                 <v-btn>Supprimer</v-btn>
             </div>
         </div>
@@ -29,15 +31,11 @@ export default {
       return{   
         items: [],
         error: '',
+        isValid: false, 
         value: '', value2: '', value3: '',
         rules: [
         value => !!value || 'Nécessaire.',
-        value2 => !!value2 || 'Nécessaire.',
-        value3 => !!value3 || 'Nécessaire.',
         value => (value || '').length <= 30 || 'Maximum 30 charactères',
-        value2 => (value2 || '').length <= 7 || 'Maximum 7 charactères',
-        value3 => (value3 || '').length <= 7 || 'Maximum 7 charactères',
-        value2 => (value2 - Math.floor(value2)) == 0 || 'Nombres entière uniquement'
         ],
         text: [],
       }

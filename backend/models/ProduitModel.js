@@ -32,7 +32,6 @@ export const insertProduct=(data,result)=>{
             console.log(err);
             result(err, null);
         }else{
-            console.log(data);
             result(null, results); 
         };
     });
@@ -42,7 +41,6 @@ export const insertProduct=(data,result)=>{
 export const updateProduct = (data, id, result)=>{
     db.query("UPDATE produit SET produit_nom = ?, produit_quantite = ?, produit_prix_unique = ? WHERE produit_id = ?", [data.produit_name, data.produit_quantite, data.produit_prix_unique, id], (err, results)=>{
         if(err){
-            console.log(err);
             result(err, null);
         }else{
             result(null, results); 
