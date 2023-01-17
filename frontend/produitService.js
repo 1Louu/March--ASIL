@@ -54,9 +54,9 @@ class ProduitService{
         });
     }
 
-    // Delete Collect
-    static deleteItem(id) {
-        return axios.delete(`${url}${id}`);
+    // Delete Prod
+    static deleteProd(id) {
+        return axios.delete(`${url}/${id}`);
     }
 }
 

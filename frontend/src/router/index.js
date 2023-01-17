@@ -1,15 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
 // Import components 
-import MainPage from '../views/MainPage.vue';
+import MarcheProd from '../views/MarcheProd.vue';
 import ASILInventory from '../views/GestionInventaire.vue';
 
 const routes = [
     {
         path: "/",
-        component: MainPage, 
+        component: MarcheProd, 
     },{
         path: "/gestion-inventaire", 
         component: ASILInventory,
+    },{
+        
     }
 ];
 

@@ -1,43 +1,32 @@
 <template>
     <div>
-        <h1>Gestion d'inventaire</h1>
-        <v-btn router-link to="/">Shop</v-btn>
-        <v-btn router-link to="/analyse">Analyse</v-btn>
-        <div class="insert">
-            <v-text-field
-            variant="outlined" @input="checkRules"
-            label="Nom" v-model="text.nom" required clearable/>
-            <v-text-field
-            variant="outlined" type="number" @input="checkRules"
-            label="quantite" v-model="text.quantite" required clearable/>
-            <v-text-field
-            variant="outlined" type="number" @input="checkRules"
-            label="Prix Unique" v-model="text.prix_unique" suffix="€" clearable required/>
-            <div>
-                <v-btn v-on:click="createItem">Ajouter</v-btn>
-                <v-btn>Supprimer</v-btn>
-            </div>
-        </div>
-        
+      <v-btn router-link to="/">Shop</v-btn>
+      <div class="disp-prod">
+        <ListeProd @open="showModal= true"/>
+      </div>
     </div>
+    <PopAjoutProd v-if="showModal == true" @close="showModal = false, this.refresh()" />
 </template>
 
 <script>
 import ProduitService from '../../produitService.js';
+import PopAjoutProd from '@/components/Popups/PopAjoutProd.vue';
+import ListeProd from '../components/ListeProd.vue';
+const showModal = false;
+
 
 export default {
     name: 'GestionInventaire',
+    components : {
+    ListeProd, 
+    PopAjoutProd
+    },
    data(){
       return{   
         items: [],
         error: '',
-        isValid: false, 
-        value: '', value2: '', value3: '',
-        rules: [
-        value => !!value || 'Nécessaire.',
-        value => (value || '').length <= 30 || 'Maximum 30 charactères',
-        ],
         text: [],
+        showModal, 
       }
     },
     async created() {
@@ -54,18 +43,19 @@ export default {
       this.text.nom ="";  this.text.quantite =""; this.text.prix_unique = "";
       this.items = await ProduitService.getProduit(); 
     },
-    checkRules() {
-      this.isValid = this.rules.every(rule => rule(this.value) && rule(this.value2) && rule(this.value3));
-    }
-  }, 
+    async refresh() {
+      try{
+      this.items = await ProduitService.getProduit(); 
+    }catch (err) {
+      this.error = err.message; 
+    }}, 
+  }
 }
 </script>
 
 <style scoped lang="sass">
 @import "../style/_global.sass"
-.insert
-  background: white 
-  padding: 30px
+.disp-prod
   display: flex
-  flex-direction: column
+  margin: auto
 </style>

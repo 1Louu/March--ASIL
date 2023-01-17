@@ -21,7 +21,7 @@ router.get("/produit/:id", showProduitByID);
 
 // Create new product 
 router.post("/produit", insertProduit);
-
+    
 // Update product
 router.put("/produit/:id", updateProduit);
 

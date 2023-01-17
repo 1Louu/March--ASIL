@@ -34,6 +34,7 @@
             </div>
         </div>
     </div>
+    <v-btn class="wtf" router-link to="/gestion-inventaire">Gestionnaire d'inventaire</v-btn>
 </template>
 
 <script>
