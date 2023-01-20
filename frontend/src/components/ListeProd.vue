@@ -1,5 +1,5 @@
 <template>
-    <div class="liste-produit">
+    <div class="liste-produit" @refresh="refresh()">
         <div class="titleProd">
           <h1>Liste de Produit</h1>
           <v-btn v-on:click="$emit('open')" size="normal" icon="mdi-plus-box"></v-btn>
@@ -7,12 +7,12 @@
         <div class="produit" v-for="(item) in items"
         v-bind:item="item"
         v-bind:key="item.id"  >
-            <p>{{ item.nom }}</p>
+            <p>{{ item.nom }}  |  ID: {{ item.id }}</p>
             <p>quantité: {{ item.quantite }}</p>
             <p>Prix Unique: {{ item.prix_unique }}€</p>
             <div>
             <v-btn v-on:click="deleteProd(item.id)">Supprimer</v-btn>
-            <v-btn>Editer</v-btn>
+            <v-btn @click="$emit('open2', item.id)">Editer</v-btn>
             </div>
         </div>
     </div>
@@ -49,11 +49,15 @@ export default {
     }, async deleteProd(id){
       await ProduitService.deleteProd(id); 
       this.items = await ProduitService.getProduit(); 
-    }
+    },async refresh() {
+      try{
+      this.items = await ProduitService.getProduit(); 
+    }catch (err) {
+      this.error = err.message; 
+    }}
   }, 
 }
 </script>
-
 <style scoped lang="sass">
 @import "../style/_global.sass"
 .liste-produit

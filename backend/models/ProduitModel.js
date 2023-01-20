@@ -39,7 +39,7 @@ export const insertProduct=(data,result)=>{
 
 // Mettre à Jour un produit par ID
 export const updateProduct = (data, id, result)=>{
-    db.query("UPDATE produit SET produit.nom = ?, produit.quantite = ?, produit.prix_unique = ? WHERE produit.id = ?", [data.produit.name, data.produit.quantite, data.produit.prix_unique, id], (err, results)=>{
+    db.query("UPDATE produit SET produit.nom = ?, produit.quantite = ?, produit.prix_unique = ? WHERE produit.id = ?", [data.nom, data.quantite, data.prix_unique, id], (err, results)=>{
         if(err){
             result(err, null);
         }else{

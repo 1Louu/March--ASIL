@@ -2,24 +2,32 @@
     <div>
       <v-btn router-link to="/">Shop</v-btn>
       <div class="disp-prod">
-        <ListeProd @open="showModal= true"/>
+        <ListeProd @open="showModal= true" @open2="showModalUpdate"/>
+        <ProdAnalyse/>
       </div>
     </div>
     <PopAjoutProd v-if="showModal == true" @close="showModal = false, this.refresh()" />
+    <PopUpdateProd v-if="showModal2 == true" @close="showModal2 = false, this.refresh()"  :id = "idparam"/>
 </template>
 
 <script>
 import ProduitService from '../../produitService.js';
 import PopAjoutProd from '@/components/Popups/PopAjoutProd.vue';
+import PopUpdateProd from '@/components/Popups/PopUpdateProd.vue';
+import ProdAnalyse from '../components/ProdAnalyse.vue';
 import ListeProd from '../components/ListeProd.vue';
 const showModal = false;
+const showModal2 = false;
+const idparam = 0; 
 
 
 export default {
     name: 'GestionInventaire',
     components : {
     ListeProd, 
-    PopAjoutProd
+    PopAjoutProd, 
+    ProdAnalyse, 
+    PopUpdateProd
     },
    data(){
       return{   
@@ -27,28 +35,21 @@ export default {
         error: '',
         text: [],
         showModal, 
+        showModal2, 
+        idparam,
       }
     },
-    async created() {
-        try{
-        this.items = await ProduitService.getProduit(); 
-        }catch (err) {
-        this.error = err.message; 
-        }
-    }, 
     methods: {
-    async createItem() {
-      console.log(this.text);
-      await ProduitService.insertProduit(this.text);
-      this.text.nom ="";  this.text.quantite =""; this.text.prix_unique = "";
-      this.items = await ProduitService.getProduit(); 
-    },
     async refresh() {
       try{
       this.items = await ProduitService.getProduit(); 
     }catch (err) {
       this.error = err.message; 
     }}, 
+    async showModalUpdate(id){
+      this.idparam=id;
+      this.showModal2= true;
+    }
   }
 }
 </script>

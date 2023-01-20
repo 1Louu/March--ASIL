@@ -1,7 +1,7 @@
 <template>
     <div class="PopUp">
       <div class="insert">
-        <h2>Ajouter un produit</h2>
+        <h2>Editer le produit sélectionné ( ID : {{ id}} )</h2>
         <v-text-field
         variant="outlined" @input="checkRules"
         label="Nom" v-model="text.nom" required clearable/>
@@ -12,7 +12,7 @@
         variant="outlined" type="number" @input="checkRules"
         label="Prix Unique" v-model="text.prix_unique" suffix="€" clearable required/>
         <div class="btnset">
-            <v-btn @click="createItem">Ajouter</v-btn>
+            <v-btn @click="updateItem(id)">valider</v-btn>
             <v-btn @click="$emit('close')">Annuler</v-btn>
         </div>
       </div>
@@ -24,9 +24,9 @@ import ProduitService from '../../../produitService.js';
 
 export default {
     name: 'GestionInventaire',
-   data(){
+    props: ['id'],
+    data(){
       return{   
-        items: [],
         error: '',
         isValid: false, 
         value: '', value2: '', value3: '',
@@ -36,19 +36,11 @@ export default {
         ],
         text: [],
       }
-    },
-    async created() {
-        try{
-        this.items = await ProduitService.getProduit(); 
-        }catch (err) {
-        this.error = err.message; 
-        }
     }, 
     methods: {
-    async createItem() {
-      await ProduitService.insertProduit(this.text);
+    async updateItem(id) {
+      await ProduitService.UpdateProduitByID(id, this.text);
       this.text.nom ="";  this.text.quantite =""; this.text.prix_unique = "";
-      this.items = await ProduitService.getProduit(); 
       this.$emit('close');
     },
     checkRules() {

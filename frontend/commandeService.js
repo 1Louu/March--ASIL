@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const url = 'http://localhost:5000/produit';
+const url = 'http://localhost:5000/commande';
 
-class ProduitService{
-    // Get Produit
-    static getProduit() {
+class CommandeService{
+    // Get Commande
+    static getCommande() {
         return new Promise ((resolve,reject) => {
             axios.get(url).then((res) => {
                 const data = res.data;
@@ -22,10 +22,10 @@ class ProduitService{
         });
     }
 
-    // Get Produit By Id
-    static getProduitByID(id){
+    // Get Commande By Id
+    static getCommandeByID(id){
         return new Promise ((resolve,reject) => {
-            axios.get(url +'/'+ id).then((res) => {
+            axios.get(url + id).then((res) => {
                 const data = res.data;
                 resolve(
                     data.map(post => ({
@@ -41,38 +41,19 @@ class ProduitService{
         });
     }
 
-    // Update Produit by ID
-    static UpdateProduitByID(id, text){
-        console.log(url, id)
-        return axios.put(url+'/'+id, {
-            nom: text.nom,
-            quantite: text.quantite,
-            prix_unique: text.prix_unique,
-        }).then(response => {
-            console.log(response);
-        })
-        .catch((err)=> {
-            console.log(err);
-        })
-    }
-
-    // Create Produit
-    static insertProduit(text){
-        
-        if( text.quantite == 0){
-            text.quantite = 1;
-        }
+    // Create Commande
+    static insertCommande(text){
         return axios.post(url, {
-            nom: text.nom,
-            quantite: text.quantite,
-            prix_unique: text.prix_unique,
+            quantcom: text.quantcom,
+            prixcom: text.prixcom,
+            datecom: text.datecom,
         });
     }
 
-    // Delete Prod
-    static deleteProd(id) {
+    // Delete Com
+    static deleteCom(id) {
         return axios.delete(`${url}/${id}`);
     }
 }
 
-export default ProduitService; 
+export default CommandeService; 
