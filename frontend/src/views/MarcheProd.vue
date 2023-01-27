@@ -29,7 +29,7 @@
                 <p>Prix Total : {{ total }}€</p>
                 <div>
                     <v-btn @click="removeAllFromCart">Annuler</v-btn>
-                    <v-btn>Payer</v-btn>
+                    <v-btn @click="payAllFromCart">Payer</v-btn>
                 </div>
             </div>
         </div>
@@ -39,6 +39,7 @@
 
 <script>
 import produitService from '@/../produitService.js'; 
+import CommandeService from '@/../commandeService.js';
 
 export default {
     data() {
@@ -47,6 +48,8 @@ export default {
             error: '',
             cart: [],
             total: 0,
+            cElement: [],
+            text: [],
         };
     }, 
     async created() {
@@ -61,6 +64,15 @@ export default {
         }
     }, 
     methods: {
+        delay(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
+        },
+        async refresh() {
+            try{
+            this.items = await produitService.getProduit(); 
+            }catch (err) {
+            this.error = err.message; 
+        }}, 
         totalPrice(){
             this.total= 0;
             this.cart.forEach(element => this.total= element.prix + this.total);
@@ -102,7 +114,28 @@ export default {
         // Check if the item is in the cart and at the quantite limit
         const cItem = this.cart.find(i => i.id === item.id)
         return cItem && cItem.quantite >= item.quantite
-        }
+        }, 
+        async payAllFromCart(){
+            this.cart.forEach( async element =>{
+                const cItem = this.items.find(i => i.id === element.id);
+                this.cElement.quantcom = element.quantite;
+                this.cElement.idprod = element.id;
+                this.cElement.prixcom= element.prix;
+
+                if(cItem.quantite === element.quantite){
+                    await CommandeService.insertCommande(this.cElement);
+                    await produitService.deleteProd(this.cElement.id);
+                }else{
+                    await CommandeService.insertCommande(this.cElement);
+                    this.text = cItem; 
+                    this.text.quantite = this.text.quantite - this.cElement.quantcom;
+                    await produitService.UpdateProduitByID(this.text.id, this.text);
+                }
+            });
+            this.removeAllFromCart();
+            await this.delay(1000);
+            this.refresh();
+        },
     }
 }
 </script>

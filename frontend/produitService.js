@@ -10,8 +10,7 @@ class ProduitService{
                 const data = res.data;
                 resolve(
                     data.map(post => ({
-                        ...post,
-                        createdAt: new Date(post.createdAt)
+                        ...post
                     }))
                 );
             })
@@ -29,8 +28,7 @@ class ProduitService{
                 const data = res.data;
                 resolve(
                     data.map(post => ({
-                        ...post,
-                        createdAt: new Date(post.createdAt)
+                        ...post
                     }))
                 );
             })
@@ -43,13 +41,10 @@ class ProduitService{
 
     // Update Produit by ID
     static UpdateProduitByID(id, text){
-        console.log(url, id)
         return axios.put(url+'/'+id, {
             nom: text.nom,
             quantite: text.quantite,
             prix_unique: text.prix_unique,
-        }).then(response => {
-            console.log(response);
         })
         .catch((err)=> {
             console.log(err);

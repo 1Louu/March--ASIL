@@ -44,6 +44,7 @@ class CommandeService{
     // Create Commande
     static insertCommande(text){
         return axios.post(url, {
+            idprod: text.idprod,
             quantcom: text.quantcom,
             prixcom: text.prixcom,
             datecom: text.datecom,
