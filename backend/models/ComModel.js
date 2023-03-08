@@ -59,3 +59,8 @@ export const deleteCommandeByID=(id, result)=>{
         };
     });
 };
+
+// Récuperer les données du produit qui apparait le plus souvent 
+export const getProduitCountedByCom = ()=>{
+    db.query("SELECT *, COUNT(*) AS idcom FROM produit p JOIN commande c ON p.id = c.idprod GROUP BY p.nom ORDER BY idcom DESC LIMIT 1;")
+};

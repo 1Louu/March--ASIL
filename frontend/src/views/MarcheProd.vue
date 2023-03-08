@@ -1,4 +1,5 @@
 <template>
+    <v-btn class="link" router-link to="/gestion-inventaire">Gestionnaire d'inventaire</v-btn>
     <div class="Menu">
         <div class="left-menu">
             <h1>Sélection de produit</h1>
@@ -34,7 +35,6 @@
             </div>
         </div>
     </div>
-    <v-btn class="wtf" router-link to="/gestion-inventaire">Gestionnaire d'inventaire</v-btn>
 </template>
 
 <script>
@@ -145,7 +145,7 @@ export default {
 .Menu
     display: flex
     margin: auto
-    margin-top: 5vh
+    margin-top: 0
     width: 80vw
 
 .left-menu
@@ -177,7 +177,6 @@ export default {
             background: $Color2
             display: flex
             font-weight: bold
-            color: $Light
             flex-direction: column
             padding: 5px
             text-align: left
@@ -187,9 +186,13 @@ export default {
             margin-right: 10px
             border-radius: 20px
             border: 3px solid #00000070
-            font-size: 20px
             padding: 20px
             box-shadow: #00000059 3px 3px 3px 1px
+
+            p
+                margin-bottom: 6px
+                font-size: 18px
+                color: black
 
 .right-menu
     display: flex
@@ -216,7 +219,6 @@ export default {
             background: $Color2
             display: flex
             font-weight: bold
-            color: $Light
             flex-direction: column
             text-align: left
             margin: 20px 10px 0px 20px
@@ -227,6 +229,9 @@ export default {
             font-size: 20px
             padding: 20px
             box-shadow: #00000059 3px 3px 3px 1px
+            p 
+                color: black
+                margin-bottom: 8px
     .cart-check
         height: 15vh
         border-left: #00000070 7px solid
@@ -247,6 +252,9 @@ export default {
             margin-left: 32px
             margin-right: 32px
 
-.btn
-    background: $Color1
+
+.link
+    margin-top: 10px
+    margin-bottom: 10px
+    margin-left: 45%
 </style>

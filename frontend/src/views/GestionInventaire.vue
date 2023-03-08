@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-btn router-link to="/">Shop</v-btn>
+      <v-btn class="link" router-link to="/">Shop</v-btn>
       <div class="disp-prod">
         <ListeProd @open="showModal= true" @open2="showModalUpdate"/>
         <ProdAnalyse/>
@@ -59,4 +59,9 @@ export default {
 .disp-prod
   display: flex
   margin: auto
+
+.link
+  margin-top: 10px
+  margin-bottom: 10px
+  margin-left: 48%
 </style>

@@ -1,22 +1,25 @@
 <template>
     <div class="liste-produit" @refresh="refresh()">
         <div class="titleProd">
-          <h1>Liste de Produit</h1>
+          <h2>Liste de Produit</h2>
           <v-btn v-on:click="$emit('open')" size="normal" icon="mdi-plus-box"></v-btn>
         </div>
-        <div class="produit" v-for="(item) in items"
-        v-bind:item="item"
-        v-bind:key="item.id"  >
-            <p>{{ item.nom }}  |  ID: {{ item.id }}</p>
-            <p>quantité: {{ item.quantite }}</p>
-            <p>Prix Unique: {{ item.prix_unique }}€</p>
-            <div>
-            <v-btn v-on:click="deleteProd(item.id)">Supprimer</v-btn>
-            <v-btn @click="$emit('open2', item.id)">Editer</v-btn>
-            </div>
+        <div class="interfaceprod">
+          <div class="produit" v-for="(item) in items"
+          v-bind:item="item"
+          v-bind:key="item.id"  >
+              <p>{{ item.nom }}</p>
+              <p>quantité: {{ item.quantite }}</p>
+              <p>Prix Unique: {{ item.prix_unique }}€</p>
+              <div>
+              <v-btn v-on:click="deleteProd(item.id)">Supprimer</v-btn>
+              <v-btn @click="$emit('open2', item.id)">Editer</v-btn>
+              </div>
+          </div>
         </div>
     </div>
 </template>
+
 <script>
 import ProduitService from '../../produitService.js';
 import PopAjoutProd from './Popups/PopAjoutProd.vue';
@@ -61,24 +64,42 @@ export default {
 <style scoped lang="sass">
 @import "../style/_global.sass"
 .liste-produit
-  background: $Light
   width: 40vw
   height: 80vh
-  overflow: auto
   border-top-left-radius: 20px
+  border-bottom-left-radius: 20px
+  margin: auto
+  margin-right: 0px
+.interfaceprod
+  border-left: #00000033 7px solid
+  border-bottom: #00000070 7px solid
+  overflow: auto
+  background: $Light
+  height: -webkit-fill-available
+  border-bottom-left-radius:  20px
   .produit
     background: $Color2
     padding: 20px
     margin: 20px
     border-radius: 10px
+    border: $Color2-C solid
+    width: fit-content
+    font-size: 14px
+    button:first-child
+      margin-right: 20px
 .titleProd
   display: flex
   flex-direction: row
   background: $Color1
   text-align: center
   border-top-left-radius: 20px
-  h1
+  border-left: #00000033 7px solid
+  border-top: #00000033 7px solid
+
+  h2
+    font-size: 30px
     margin: auto
+    color: $Light
   button
     width: 40px
     height: 40px
