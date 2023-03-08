@@ -27,8 +27,7 @@ Ce qui fait effectivement ce projet d'une structure de Fullstack.
 ## Arborescence du site
 
 - **[ / ]** Page d'accueil qui démontre une table des produits en stock proposées avec des boutons Ajouter. Elle démontre également une autre colonne qui présentes les produits ajoutés, l'utilisateur aura ensuite la possibilité de "payer" ou "d'annuler" les produits selectionné. 
-- **[ /analyse ]** Page qui détermine les comptes, les achats effectués et les importations 
-- **[ /gestion-inventaire ]** Page permettant d'apporter des modifications à les produits importé, d'ajouter les ingrédients nécessaire pour un produit désigné.
+- **[ /gestion-inventaire ]** Page permettant d'apporter des modifications à les produits importé, d'ajouter les ingrédients nécessaire pour un produit désigné et détermine les comptes, les achats effectués et les importations.
 
 ##### *Page secondaire ( Basse priorité ) :*
 
